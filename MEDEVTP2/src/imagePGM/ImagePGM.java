@@ -4,6 +4,8 @@
  */
 package imagePGM;
 
+import java.util.ArrayList;
+
 /**
  *gere les objets PGM
  * @author gvedeau
@@ -12,6 +14,9 @@ public class ImagePGM {
     
     private int hauteur;
     private int longueur;
+    private ArrayList<Integer> image;
+    
+    
 
     /**
      * Get the value of longueur
@@ -48,5 +53,23 @@ public class ImagePGM {
     public void setHauteur(int hauteur) {
         this.hauteur = hauteur;
     }
+    
+    /**
+     * Get the value of image
+     * @return 
+     */
+    public ArrayList<Integer> getImage() {
+        return image;
+    }
+    /**
+     * set the value of Image
+     * @param image 
+     */
+    public void setImage(ArrayList<Integer> image) {
+        this.image = image;
+    }
+    
+    
+    
 
 }
