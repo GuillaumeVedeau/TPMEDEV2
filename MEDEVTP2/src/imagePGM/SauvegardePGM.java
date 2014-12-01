@@ -48,6 +48,12 @@ public class SauvegardePGM {
      int tot = l*h;
      int j = 0;
      
+     
+     /**
+      * i compte les pixels déjà écrits
+      * j compte le nombre de pixels inscrits sur une ligne
+      */
+     
      for(int i=0 ; i<tot ; i++ ){
          this.fichier.write(Pixels.get(i));
          i++;
