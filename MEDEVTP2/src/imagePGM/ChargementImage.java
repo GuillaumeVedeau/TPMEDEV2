@@ -15,7 +15,7 @@ import java.util.StringTokenizer;
  */
 public class ChargementImage {
 
-    private ImagePGM image;
+    private ImagePGM image = new ImagePGM();
     protected String nomFichier;
     protected BufferedReader fichier;
     private boolean valide = false;
@@ -35,42 +35,65 @@ public class ChargementImage {
         String ligne;
         String mot;
         String delimiteur = " ";
+        boolean finDuDocument = false;
         try {
-            
-            
 
-            while ((ligne = fichier.readLine()) != null) {
+            if (((ligne = fichier.readLine()) != null) && (new StringTokenizer(ligne, delimiteur)).nextToken().equalsIgnoreCase("p2")) {
+      
+                ligne = fichier.readLine(); // On ignore la ligne de commentaires
+                
+                // On lit la hauteur et la largeur
+                ligne = fichier.readLine();
                 StringTokenizer tokenizer = new StringTokenizer(ligne, delimiteur);
+                this.getImage().setLongueur(Integer.getInteger(tokenizer.nextToken()));
+                this.getImage().setHauteur(Integer.getInteger(tokenizer.nextToken()));
+                
+                //On lit la valeur max
+                ligne = fichier.readLine();
+                tokenizer = new StringTokenizer(ligne, delimiteur);
+                this.getImage().setPlusHaut(Integer.getInteger(tokenizer.nextToken()));
+
+                
+                ligne = fichier.readLine();
+
+                while (!finDuDocument) {
 
 
 
-                mot = tokenizer.nextToken();
+                    tokenizer = new StringTokenizer(ligne, delimiteur);
+
+                    if (tokenizer.hasMoreTokens()) {
+                        mot = tokenizer.nextToken();
+                        image.getImage().add(Integer.getInteger(mot));
+                    } else {
+                        if ((ligne = fichier.readLine()) != null) {
+                            tokenizer = new StringTokenizer(ligne, delimiteur);
+                            mot = tokenizer.nextToken();
+                            image.getImage().add(Integer.getInteger(mot));
+                        } else {
+                            finDuDocument = true;
+                        }
 
 
-                switch (mot) {
-                    case "":
+                    }
 
-                        break;
 
-                    default:
 
                 }
             }
 
             fichier.close();
 
+
+
+
         } catch (Exception e) {
             e.printStackTrace();
+
+
+
         }
-
-
-        if (valide){
         return image;
-        }
-        else{
-            return new ImagePGM();
-        }
-
     }
 
     /**
