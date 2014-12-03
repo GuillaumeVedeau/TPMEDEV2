@@ -16,6 +16,26 @@ public class ImagePGM {
     private int longueur;
     private ArrayList<Integer> image;
     
+    private int plusHaut;
+
+    /**
+     * Get the value of plusHaut
+     *
+     * @return the value of plusHaut
+     */
+    public int getPlusHaut() {
+        return plusHaut;
+    }
+
+    /**
+     * Set the value of plusHaut
+     *
+     * @param plusHaut new value of plusHaut
+     */
+    public void setPlusHaut(int plusHaut) {
+        this.plusHaut = plusHaut;
+    }
+
     
 
     /**
