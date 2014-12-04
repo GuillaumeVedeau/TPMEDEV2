@@ -112,7 +112,11 @@ public class ImagePGM {
         return ("je suis une image PGM et j'ai "+ this.getHauteur()+ " en hauteur et "+ this.getLongueur() +" en longueur."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    
+    /**
+     * 
+     * @param i correspond au niveau de gris seuil de la fonction
+     * @return ImagePGM correspondant à l'image passé par le filtre seuil
+     */
     public ImagePGM seuillage(int i){
         try{
             ImagePGM imageSeuil = new ImagePGM(this.hauteur,this.longueur);
@@ -138,6 +142,11 @@ public class ImagePGM {
         
     }
     
+    /**
+     * 
+     * @param imageASoustraire correspond à l'image qui va être soustraite de this
+     * @return ImagePgm Difference des deux autres
+     */
     public ImagePGM difference(ImagePGM imageASoustraire){
         try{
             int k; 
