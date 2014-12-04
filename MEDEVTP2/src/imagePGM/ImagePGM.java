@@ -210,16 +210,21 @@ public class ImagePGM {
         return null;
 
     }
-
-    public ImagePGM difference(ImagePGM imageASoustraire) {
-        try {
-            int k;
-            if (this.hauteur == imageASoustraire.hauteur && this.longueur == imageASoustraire.longueur) {
-                ImagePGM imageResultat = new ImagePGM(this.hauteur, this.longueur);
-                for (int j = 0; j < hauteur * longueur; j++) {
-                    k = this.image.get(j) - imageASoustraire.image.get(j);
-                    if (k > 255) {
-                        k = 255;
+    
+    /**
+     * 
+     * @param imageASoustraire correspond à l'image qui va être soustraite de this
+     * @return ImagePgm Difference des deux autres
+     */
+    public ImagePGM difference(ImagePGM imageASoustraire){
+        try{
+            int k; 
+            if (this.hauteur==imageASoustraire.hauteur && this.longueur==imageASoustraire.longueur){
+                ImagePGM imageResultat = new ImagePGM(this.hauteur,this.longueur);
+                for (int j=0; j<hauteur*longueur; j++){
+                    k=this.image.get(j)-imageASoustraire.image.get(j);
+                    if(k>255){
+                        k=255;
                     }
                     if (k < 0) {
                         k = 0;
