@@ -150,4 +150,34 @@ public class ImagePGM {
         return grandImage;
 
     }
+    
+    
+    public void seuillage(int i){
+        try{
+            int k;
+            if (i>255||i<0){
+                System.out.println("Parameter not in range");
+            }else{
+                for(int j=0;j<hauteur*longueur;i++){
+                    k=this.image.get(j)-i;
+                    if(k>=0){
+                        this.image.set(j, 255);
+                    } else{
+                        this.image.set(j, 0);
+                    }
+                }
+            }
+            
+            
+            
+        } 
+        catch (Exception ex) {
+            
+        }
+        
+        
+        
+    }
+    
+    
 }

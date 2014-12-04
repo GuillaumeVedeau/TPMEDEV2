@@ -56,6 +56,7 @@ public class SauvegardePGM {
      
      for(int i=0 ; i<tot ; i++ ){
          this.fichier.write(Pixels.get(i));
+         this.fichier.write(" ");
          i++;
          j++;
          if(j==17){
