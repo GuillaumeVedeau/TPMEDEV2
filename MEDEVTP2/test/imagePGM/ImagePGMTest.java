@@ -87,6 +87,7 @@ public class ImagePGMTest {
         assertEquals(2, testImageSeuil.getHauteur());
         assertEquals(3, testImageSeuil.getLongueur());
        
+        assertEquals(null, testImage.seuillage(300));
         
     }
 
