@@ -63,6 +63,30 @@ public class ImagePGMTest {
     @Test
     public void testSeuillage() {
         System.out.println("seuillage");
+        ImagePGM testImage = new ImagePGM(2,3);
+        ArrayList<Integer> testPixels = new ArrayList<Integer>();
+        testPixels.add(255);
+        testPixels.add(250);
+        testPixels.add(155);
+        testPixels.add(150);
+        testPixels.add(5);
+        testPixels.add(0);
+        testImage.setImage(testPixels);
+        ImagePGM testImageSeuil = new ImagePGM(2,3);
+        testImageSeuil = testImage.seuillage(152);
+        
+        ArrayList<Integer> expResult = new ArrayList<>();
+        expResult.add(255);
+        expResult.add(255);
+        expResult.add(255);
+        expResult.add(0);
+        expResult.add(0);
+        expResult.add(0);
+        
+        assertEquals(expResult, testImageSeuil.getImage());
+        assertEquals(2, testImageSeuil.getHauteur());
+        assertEquals(3, testImageSeuil.getLongueur());
+       
         
     }
 
