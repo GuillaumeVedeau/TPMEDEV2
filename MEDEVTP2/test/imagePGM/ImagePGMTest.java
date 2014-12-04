@@ -139,7 +139,7 @@ public class ImagePGMTest {
         System.out.println("difference");
         
         ImagePGM testImage = new ImagePGM(2,3);
-        ArrayList<Integer> testPixels = new ArrayList<Integer>();
+        ArrayList<Integer> testPixels = new ArrayList<>();
         testPixels.add(255);
         testPixels.add(250);
         testPixels.add(155);
@@ -149,11 +149,11 @@ public class ImagePGMTest {
         testImage.setImage(testPixels);
         ImagePGM testImageASoustraire = new ImagePGM(2,3);
         testPixels.set(0,0);
-        testPixels.add(1,5);
-        testPixels.add(2,150);
-        testPixels.add(3,-200);
-        testPixels.add(4,250);
-        testPixels.add(5,255);
+        testPixels.set(1,5);
+        testPixels.set(2,150);
+        testPixels.set(3,-200);
+        testPixels.set(4,250);
+        testPixels.set(5,255);
         testImageASoustraire.setImage(testPixels);
         ImagePGM result = testImage.difference(testImageASoustraire);
         
