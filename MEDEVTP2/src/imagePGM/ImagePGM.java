@@ -113,8 +113,9 @@ public class ImagePGM {
     }
     
     
-    public void seuillage(int i){
+    public ImagePGM seuillage(int i){
         try{
+            ImagePGM imageSeuil = new ImagePGM(this.hauteur,this.longueur);
             int k;
             if (i>255||i<0){
                 System.out.println("Parameter not in range");
@@ -122,23 +123,46 @@ public class ImagePGM {
                 for(int j=0;j<hauteur*longueur;i++){
                     k=this.image.get(j)-i;
                     if(k>=0){
-                        this.image.set(j, 255);
+                        imageSeuil.image.set(j, 255);
                     } else{
-                        this.image.set(j, 0);
+                        imageSeuil.image.set(j, 0);
                     }
                 }
-            }
-            
-            
-            
+            }   
+            return imageSeuil;
         } 
         catch (Exception ex) {
             
-        }
-        
-        
+        } 
+        return null;
         
     }
     
+    public ImagePGM difference(ImagePGM imageASoustraire){
+        try{
+            int k; 
+            if (this.hauteur==imageASoustraire.hauteur && this.longueur==imageASoustraire.longueur){
+                ImagePGM imageResultat = new ImagePGM(this.hauteur,this.longueur);
+                for (int j=0; j<hauteur*longueur; j++){
+                    k=this.image.get(j)-imageASoustraire.image.get(j);
+                    if(k>255){
+                        k=255;
+                    }
+                    if(k<0){
+                        k=0;
+                    }
+                    imageResultat.image.set(j, k);
+                }
+                return imageResultat;
+            } else {
+                System.out.println("Les images ne sont pas de même taille");
+            }
+        }
+        catch (Exception ex) {
+            
+        } 
+        return null;
+        
+    }
     
 }
