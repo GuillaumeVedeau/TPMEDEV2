@@ -63,6 +63,7 @@ public class ImagePGMTest {
     @Test
     public void testSeuillage() {
         System.out.println("seuillage");
+        
         ImagePGM testImage = new ImagePGM(2,3);
         ArrayList<Integer> testPixels = new ArrayList<Integer>();
         testPixels.add(255);
@@ -97,12 +98,38 @@ public class ImagePGMTest {
     @Test
     public void testDifference() {
         System.out.println("difference");
-        ImagePGM imageASoustraire = null;
-        ImagePGM instance = new ImagePGM();
-        ImagePGM expResult = null;
-        ImagePGM result = instance.difference(imageASoustraire);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        ImagePGM testImage = new ImagePGM(2,3);
+        ArrayList<Integer> testPixels = new ArrayList<Integer>();
+        testPixels.add(255);
+        testPixels.add(250);
+        testPixels.add(155);
+        testPixels.add(150);
+        testPixels.add(5);
+        testPixels.add(0);
+        testImage.setImage(testPixels);
+        ImagePGM testImageASoustraire = new ImagePGM(2,3);
+        testPixels.set(0,0);
+        testPixels.add(1,5);
+        testPixels.add(2,150);
+        testPixels.add(3,-200);
+        testPixels.add(4,250);
+        testPixels.add(5,255);
+        testImageASoustraire.setImage(testPixels);
+        ImagePGM result = testImage.difference(testImageASoustraire);
+        
+        ArrayList<Integer> expResult = new ArrayList<>();
+        expResult.add(255);
+        expResult.add(245);
+        expResult.add(5);
+        expResult.add(255);
+        expResult.add(0);
+        expResult.add(0);
+        
+        assertEquals(expResult, result.getImage());
+        assertEquals(2, result.getHauteur());
+        assertEquals(3, result.getLongueur());
+        
+        assertEquals(null, testImage.difference(new ImagePGM(3,3)));
     }
 }
