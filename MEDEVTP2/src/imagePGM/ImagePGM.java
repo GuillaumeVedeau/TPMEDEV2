@@ -27,10 +27,10 @@ public class ImagePGM {
     public ImagePGM(int hauteur, int longueur) {
         this.hauteur = hauteur;
         this.longueur = longueur;
-        
-        for(int i = 0; i<hauteur; i++){
-            for(int j = 0; j<longueur;i++){
-                this.image.set(i+j*this.longueur, new Integer(0));
+
+        for (int i = 0; i < hauteur; i++) {
+            for (int j = 0; j < longueur; i++) {
+                this.image.set(i + j * this.longueur, new Integer(0));
             }
         }
     }
@@ -41,9 +41,9 @@ public class ImagePGM {
     public ImagePGM() {
         hauteur = 1;
         longueur = 1;
-        for(int i = 0; i<hauteur; i++){
-            for(int j = 0; j<longueur;i++){
-                this.image.set(i+j*this.longueur, new Integer(0));
+        for (int i = 0; i < hauteur; i++) {
+            for (int j = 0; j < longueur; i++) {
+                this.image.set(i + j * this.longueur, new Integer(0));
             }
         }
     }
@@ -126,14 +126,14 @@ public class ImagePGM {
     }
 
     /**
-     *
+     * send back a bigger ImagePGM
      * @param rapport
      */
     public ImagePGM agrandir(int rapport) {
 
 
         ImagePGM grandImage = new ImagePGM();
-        
+
         if (rapport > 0) {
             grandImage.setHauteur(this.getHauteur() * rapport);
             grandImage.setLongueur(this.getLongueur() * rapport);
@@ -151,44 +151,78 @@ public class ImagePGM {
 
     }
     
-    
-    public ImagePGM seuillage(int i){
-        try{
-            ImagePGM imageSeuil = new ImagePGM(this.hauteur,this.longueur);
+    /**
+     * send back a smaller PGM if the rapport permit it
+     * @param rapport
+     * @return 
+     */
+    public ImagePGM retrecir(int rapport) {
+
+        ImagePGM petitImage = new ImagePGM();
+
+        if (rapport > 0 && (this.getLongueur()%rapport == 0) && this.getHauteur()%rapport == 0) {
+            
+            petitImage.setHauteur(this.getHauteur() / rapport);
+            petitImage.setLongueur(this.getLongueur() / rapport);
+
+            for (int i = 0; i < petitImage.getHauteur(); i++) {
+                for (int j = 0; j < petitImage.getLongueur(); j++) {
+                    
+                    int moyenne = 0;
+                    
+                    for(int k = 0; k< rapport; k++){
+                        for(int l = 0;l<rapport;l++){
+                            moyenne = moyenne + this.getImage().get((i+j*petitImage.getLongueur()*rapport + k + l*this.getLongueur())).intValue();
+                        }
+                        
+                    }
+                    
+                    moyenne = moyenne/(rapport*rapport);
+
+                    petitImage.getImage().set(i + petitImage.getLongueur() * j, new Integer(moyenne));
+                }
+
+            }
+        }
+
+        return petitImage;
+    }
+
+    public ImagePGM seuillage(int i) {
+        try {
+            ImagePGM imageSeuil = new ImagePGM(this.hauteur, this.longueur);
             int k;
-            if (i>255||i<0){
+            if (i > 255 || i < 0) {
                 System.out.println("Parameter not in range");
-            }else{
-                for(int j=0;j<hauteur*longueur;i++){
-                    k=this.image.get(j)-i;
-                    if(k>=0){
+            } else {
+                for (int j = 0; j < hauteur * longueur; i++) {
+                    k = this.image.get(j) - i;
+                    if (k >= 0) {
                         imageSeuil.image.set(j, 255);
-                    } else{
+                    } else {
                         imageSeuil.image.set(j, 0);
                     }
                 }
-            }   
+            }
             return imageSeuil;
-        } 
-        catch (Exception ex) {
-            
-        } 
+        } catch (Exception ex) {
+        }
         return null;
-        
+
     }
-    
-    public ImagePGM difference(ImagePGM imageASoustraire){
-        try{
-            int k; 
-            if (this.hauteur==imageASoustraire.hauteur && this.longueur==imageASoustraire.longueur){
-                ImagePGM imageResultat = new ImagePGM(this.hauteur,this.longueur);
-                for (int j=0; j<hauteur*longueur; j++){
-                    k=this.image.get(j)-imageASoustraire.image.get(j);
-                    if(k>255){
-                        k=255;
+
+    public ImagePGM difference(ImagePGM imageASoustraire) {
+        try {
+            int k;
+            if (this.hauteur == imageASoustraire.hauteur && this.longueur == imageASoustraire.longueur) {
+                ImagePGM imageResultat = new ImagePGM(this.hauteur, this.longueur);
+                for (int j = 0; j < hauteur * longueur; j++) {
+                    k = this.image.get(j) - imageASoustraire.image.get(j);
+                    if (k > 255) {
+                        k = 255;
                     }
-                    if(k<0){
-                        k=0;
+                    if (k < 0) {
+                        k = 0;
                     }
                     imageResultat.image.set(j, k);
                 }
@@ -196,12 +230,9 @@ public class ImagePGM {
             } else {
                 System.out.println("Les images ne sont pas de même taille");
             }
+        } catch (Exception ex) {
         }
-        catch (Exception ex) {
-            
-        } 
         return null;
-        
+
     }
-    
 }
