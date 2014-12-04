@@ -7,11 +7,12 @@ package imagePGM;
 import java.util.ArrayList;
 
 /**
- *gere les objets PGM
+ * gere les objets PGM
+ *
  * @author gvedeau
  */
 public class ImagePGM {
-    
+
     private int hauteur;
     private int longueur;
     private ArrayList<Integer> image;
@@ -19,23 +20,33 @@ public class ImagePGM {
 
     /**
      * constructeur de base
+     *
      * @param hauteur
-     * @param longueur 
+     * @param longueur
      */
     public ImagePGM(int hauteur, int longueur) {
         this.hauteur = hauteur;
         this.longueur = longueur;
+        
+        for(int i = 0; i<hauteur; i++){
+            for(int j = 0; j<longueur;i++){
+                this.image.set(i+j*this.longueur, new Integer(0));
+            }
+        }
     }
-    
+
     /**
      * constructeur par défaut
      */
     public ImagePGM() {
         hauteur = 1;
         longueur = 1;
+        for(int i = 0; i<hauteur; i++){
+            for(int j = 0; j<longueur;i++){
+                this.image.set(i+j*this.longueur, new Integer(0));
+            }
+        }
     }
-    
-    
 
     /**
      * Get the value of plusHaut
@@ -54,7 +65,6 @@ public class ImagePGM {
     public void setPlusHaut(int plusHaut) {
         this.plusHaut = plusHaut;
     }
-
 
     /**
      * Get the value of longueur
@@ -91,17 +101,20 @@ public class ImagePGM {
     public void setHauteur(int hauteur) {
         this.hauteur = hauteur;
     }
-    
+
     /**
      * Get the value of image
-     * @return 
+     *
+     * @return
      */
     public ArrayList<Integer> getImage() {
         return image;
     }
+
     /**
      * set the value of Image
-     * @param image 
+     *
+     * @param image
      */
     public void setImage(ArrayList<Integer> image) {
         this.image = image;
@@ -109,9 +122,32 @@ public class ImagePGM {
 
     @Override
     public String toString() {
-        return ("je suis une image PGM et j'ai "+ this.getHauteur()+ " en hauteur et "+ this.getLongueur() +" en longueur."); //To change body of generated methods, choose Tools | Templates.
+        return ("je suis une image PGM et j'ai " + this.getHauteur() + " en hauteur et " + this.getLongueur() + " en longueur."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
+
+    /**
+     *
+     * @param rapport
+     */
+    public ImagePGM agrandir(int rapport) {
+
+
+        ImagePGM grandImage = new ImagePGM();
+        
+        if (rapport > 0) {
+            grandImage.setHauteur(this.getHauteur() * rapport);
+            grandImage.setLongueur(this.getLongueur() * rapport);
+
+            for (int i = 0; i < grandImage.getHauteur(); i++) {
+                for (int j = 0; j < grandImage.getLongueur(); j++) {
+
+                    grandImage.getImage().set(i + grandImage.getLongueur() * j, new Integer(this.getImage().get((i + j * grandImage.getLongueur()) / rapport).intValue()));
+                }
+
+            }
+
+        }
+        return grandImage;
+
+    }
 }
