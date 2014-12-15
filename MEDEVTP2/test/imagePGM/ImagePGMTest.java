@@ -16,17 +16,7 @@ import static org.junit.Assert.*;
  */
 public class ImagePGMTest {
     
-    public ImagePGMTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+   
     /**
      * Test of agrandir method, of class ImagePGM.
      */

@@ -52,6 +52,24 @@ public class ImagePGM {
     }
 
     /**
+     * constructeur avancé
+     * @param hauteur
+     * @param longueur
+     * @param fond 
+     */
+    public ImagePGM(int hauteur, int longueur, int fond) {
+        this.hauteur = hauteur;
+        this.longueur = longueur;
+        this.image = new ArrayList<>();
+
+        for (int i = 0; i < hauteur; i++) {
+            for (int j = 0; j < longueur; j++) {
+                this.image.add((i * this.longueur) + j, new Integer(fond));
+            }
+        }
+    }
+    
+    /**
      * Get the value of plusHaut
      *
      * @return the value of plusHaut
@@ -123,6 +141,22 @@ public class ImagePGM {
         this.image = image;
     }
 
+    /**
+     * Send back a copy of a imagePGM
+     *
+     * @return
+     */
+    public ImagePGM copy() {
+        ImagePGM image = new ImagePGM(this.hauteur, this.longueur);
+
+        for (int i = 0; i < this.hauteur; i++) {
+            for (int j = 0; j < this.longueur;j++) {
+                image.getImage().set(j + i * this.longueur, this.getImage().get(j + i * this.longueur));
+            }
+        }
+        return image;
+    }
+
     @Override
     public String toString() {
         return ("je suis une image PGM et j'ai " + this.getHauteur() + " en hauteur et " + this.getLongueur() + " en longueur."); //To change body of generated methods, choose Tools | Templates.
@@ -132,6 +166,7 @@ public class ImagePGM {
      * send back a bigger ImagePGM
      *
      * @param rapport
+     * @return a bigger ImagePGM
      */
     public ImagePGM agrandir(int rapport) {
 
@@ -155,10 +190,10 @@ public class ImagePGM {
     }
 
     /**
-     * send back a smaller PGM if the rapport permit it
+     * send back a smaller PGM if the rapport permits it
      *
-     * @param rapport
-     * @return
+     * @param rapport rapport entre les 2 images
+     * @return a smaller ImagePGM
      */
     public ImagePGM retrecir(int rapport) {
 
@@ -190,8 +225,14 @@ public class ImagePGM {
         return petitImage;
     }
 
+    /**
+     * Send back a imagePGM depending of a key value : White under it and black above
+     *
+     * @param i the key value
+     * @return a black and white ImagePGM
+     */
     public ImagePGM seuillage(int i) {
-        ImagePGM imageSeuil = new ImagePGM(this.hauteur, this.longueur);
+        ImagePGM imageSeuil = this.copy();
         if (i > 255 || i < 0) {
             System.out.println("Parameter not in range");
         } else {
@@ -210,32 +251,30 @@ public class ImagePGM {
 
     /**
      *
-     * @param imageASoustraire correspond à l'image qui va être soustraite de
-     * this
+     * @param imageASoustraire correspond à l'image qui va être soustraite de this
+     * 
      * @return ImagePgm Difference des deux autres
      */
     public ImagePGM difference(ImagePGM imageASoustraire) {
-        try {
-            int k;
-            if (this.hauteur == imageASoustraire.hauteur && this.longueur == imageASoustraire.longueur) {
-                ImagePGM imageResultat = new ImagePGM(this.hauteur, this.longueur);
-                for (int j = 0; j < hauteur * longueur; j++) {
-                    k = this.image.get(j) - imageASoustraire.image.get(j);
-                    if (k > 255) {
-                        k = 255;
-                    }
-                    if (k < 0) {
-                        k = 0;
-                    }
-                    imageResultat.image.set(j, k);
+        int k;
+        ImagePGM imageResultat = new ImagePGM(this.hauteur, this.longueur,255);
+
+        if (this.hauteur == imageASoustraire.hauteur && this.longueur == imageASoustraire.longueur) {
+            for (int j = 0; j < hauteur * longueur; j++) {
+                k = this.getImage().get(j) - imageASoustraire.getImage().get(j);
+                if (k > 255) {
+                    k = 255;
                 }
-                return imageResultat;
-            } else {
-                System.out.println("Les images ne sont pas de même taille");
+                if (k < 0) {
+                    k = 0;
+                }
+                imageResultat.getImage().set(j, k);
             }
-        } catch (Exception ex) {
+           
+        } else {
+            System.out.println("Les images ne sont pas de même taille");
         }
-        return null;
+        return imageResultat;
 
     }
 }
