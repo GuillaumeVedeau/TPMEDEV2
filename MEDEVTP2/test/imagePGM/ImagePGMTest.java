@@ -68,24 +68,24 @@ public class ImagePGMTest {
     @Test
     public void testRetrecir() {
         System.out.println("retrecir");
-        int rapport = 2;
+         int rapport = 2;
         ImagePGM instance = new ImagePGM(4,4);
         instance.getImage().set(0, new Integer(0));
         instance.getImage().set(1, new Integer(0));
         instance.getImage().set(2, new Integer(100));
         instance.getImage().set(3, new Integer(100));
-        instance.getImage().set(0, new Integer(0));
-        instance.getImage().set(1, new Integer(0));
-        instance.getImage().set(2, new Integer(100));
-        instance.getImage().set(3, new Integer(100));
-        instance.getImage().set(0, new Integer(50));
-        instance.getImage().set(1, new Integer(100));
-        instance.getImage().set(2, new Integer(255));
-        instance.getImage().set(3, new Integer(255));
-        instance.getImage().set(0, new Integer(100));
-        instance.getImage().set(1, new Integer(150));
-        instance.getImage().set(2, new Integer(255));
-        instance.getImage().set(3, new Integer(255));
+        instance.getImage().set(4, new Integer(0));
+        instance.getImage().set(5, new Integer(0));
+        instance.getImage().set(6, new Integer(100));
+        instance.getImage().set(7, new Integer(100));
+        instance.getImage().set(8, new Integer(50));
+        instance.getImage().set(9, new Integer(100));
+        instance.getImage().set(10, new Integer(255));
+        instance.getImage().set(11, new Integer(255));
+        instance.getImage().set(12, new Integer(100));
+        instance.getImage().set(13, new Integer(150));
+        instance.getImage().set(14, new Integer(255));
+        instance.getImage().set(15, new Integer(255));
         
         ImagePGM result = instance.retrecir(rapport);
         
