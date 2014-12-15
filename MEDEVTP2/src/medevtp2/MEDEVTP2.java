@@ -4,6 +4,9 @@
  */
 package medevtp2;
 
+import imagePGM.ImagePGM;
+
+
 /**
  *
  * @author vvielzeu
@@ -15,5 +18,9 @@ public class MEDEVTP2 {
      */
     public static void main(String[] args) {
         
+        ImagePGM image = new ImagePGM(4,4);
+        
+        
+      
     }
 }
